@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,40 +14,19 @@ Route::get('/', function () {
 //     return $person->name();
 // });
 
-Route::get('contact', function () {
-    return "<h1>Contact</h1>";
-});
-Route::get('contact/{id}', function ($id) {
-    return $id;
-});
-// Route::get('home', function () {
-//     return "<a href='/contact'>About</a>";
+// Route::get('contact', function () {
+//     return "<h1>Contact</h1>";
 // });
-Route::get('about', function () {
-    return view('about');
-});
-Route::get('/home', function () {
-    $blogs=[
-        [
-            'title' =>'Title one',
-            'body' =>'This is a body text',
-            'status' =>1
-        ],
-        [
-            'title' =>'Title two',
-            'body' =>'This is a body text',
-            'status' =>0
-        ],
-        [
-            'title' =>'Title three',
-            'body' =>'This is a body text',
-            'status' =>1
-        ],
-        [
-            'title' =>'Title four',
-            'body' =>'This is a body text',
-            'status' =>0
-        ],
-    ];
-    return view('home',compact('blogs'));
-});
+// Route::get('contact/{id}', function ($id) {
+//     return $id;
+// });
+// // Route::get('home', function () {
+// //     return "<a href='/contact'>About</a>";
+// // });
+// Route::get('about', function () {
+//     return view('about');
+// });
+Route::get('/home',[HomeController::class,'index'] );
+//Route::get('/home',HomeController::class );
+Route::get('/login',[LoginController::class,'index'])->name('login');
+Route::post('/login',[LoginController::class,'handleLogin'])->name('login.submit');
