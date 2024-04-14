@@ -27,6 +27,6 @@ Route::get('/', function () {
 //     return view('about');
 // });
 Route::get('/home',[HomeController::class,'index'] );
-//Route::get('/home',HomeController::class );
+Route::post('/upload-file',[ImageController::class,'handleImage'] )->name['upload-file'];
 Route::get('/login',[LoginController::class,'index'])->name('login');
 Route::post('/login',[LoginController::class,'handleLogin'])->name('login.submit');
