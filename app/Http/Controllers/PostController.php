@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,7 +12,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('layouts.master');
+        return view('index');
     }
 
     /**
@@ -19,7 +20,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories=Category::all();
+
+        return view('create',compact('categories'));
     }
 
     /**
@@ -27,7 +30,7 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return 'hello';
     }
 
     /**
