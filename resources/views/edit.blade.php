@@ -3,40 +3,64 @@
     <div class="main-content mt-5">
         <div class="card">
             <div class="card-header">
-                Edit Posts
-                <a href="" class="btn btn-success">Create</a>
-                <a href="" class="btn btn-warning">Trashed</a>
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>
+                            Edit Posts
+                        </h4>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <a href="" class="btn btn-success">Back</a>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
-                <form action="">
-                    <div class="form-group">
-                        <label for="" class="form-label">Image</label>
-                   
-                       <input type="file" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-label">Title</label>
-                   
-                       <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="form-label">Title</label>
-                   
-                       <select name="" id="" class="form-control">
-                        <option value="">test1</option>
-                        <option value="">test2</option>
-                        <option value="">test3</option>
 
-                       </select>
+            {{-- @if($errors->any())
+            @foreach ($errors->all() as $error )
+                <div class="alert alert-danger">{{$error}}</div>
+            @endforeach
+
+            @endif --}}
+
+            <div class="card-body">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <div>
+                            <img style="width: 200px" src="{{ asset('storage/'.$post->image) }}" alt="">
+
+                        </div>
+                        <label for="" class="form-label">Image</label>
+
+                        <input type="file" class="form-control" name="">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Title</label>
+
+                        <input type="text" class="form-control" name="">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="form-label">Category</label>
+
+                        <select name="" id="" class="form-control" >
+                            <option value="">Select</option>
+                            {{-- @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name}}</option>
+                            @endforeach --}}
+
+
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="" class="form-label">Description</label>
-                   
-                       <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+
+                        <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button class="btn btn-primary">Submit</button>
+
                     </div>
                 </form>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
