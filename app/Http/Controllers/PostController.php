@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use File;
 class PostController extends Controller
 {
     /**
@@ -57,7 +58,8 @@ class PostController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post=Post::findOrFail($id);
+        return view('show',compact('post'));
     }
 
     /**
@@ -68,7 +70,7 @@ class PostController extends Controller
         $post=Post::findOrFail(($id));
         $categories=Category::all();
         
-        return view('edit',compact('post'));
+        return view('edit',compact('post','categories'));
     }
 
     /**
@@ -76,7 +78,32 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate(
+            [
+                'title'=>['required','max:255'],
+                'category_id'=>['required','integer'],
+                'description'=>['required']
+
+            ]);
+            $post=Post::findOrFail($id);
+            if($request->hasFile('image')){
+                $request->validate([
+                    'image'=>['required','max:2028','image'],
+
+                ]);
+                $fileName=time().'_'.$request->image->getClientOriginalName();
+                $filePath=$request->image->storeAs('uploads',$fileName);
+                File::delete(public_path(($post->image)));
+                $post->image=$filePath;
+            }
+          
+            
+            $post->title=$request->title;
+            $post->description=$request->description;
+            $post->category_id=$request->category_id;
+           
+            $post->save();
+            return redirect()->route('posts.index');
     }
 
     /**
@@ -84,6 +111,8 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post=Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('posts.index');
     }
 }

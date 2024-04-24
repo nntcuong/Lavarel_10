@@ -26,7 +26,7 @@
                             
                       
                         <tr>
-                            <th scope="row">1</th>
+                            <td scope="row">{{$post->id}}</td>
                             <td>
                                 <img src="{{ asset('storage/'.$post->image) }}" alt="" width="80">
 
@@ -36,11 +36,13 @@
                             <td>{{$post->category_id}}</td>
                             <td>{{date('d-m-Y',$post->created)}}</td>
                             <td>
-                                <a class="btn-sm btn-success btn" href="">Show</a>
+                                <a class="btn-sm btn-success btn" href="{{route('posts.show',$post->id)}}">Show</a>
                                 <a class="btn-sm btn-primary btn" href="{{route('posts.edit',$post->id)}}">Edit</a>
-                                <a class="btn-sm btn-danger btn" href="">Delete</a>
-
-                                
+                                <form action="{{ route('posts.destroy', $post->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
                             </td>
                       
                         </tr>
