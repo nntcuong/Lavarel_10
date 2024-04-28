@@ -36,5 +36,8 @@ Route::get('/', function () {
 // })->name('success');
 // Route::get('/download',[ImageController::class,'download'])->name('download');
 // Route::get('/login',[LoginController::class,'index'])->name('login');
-// Route::post('/login',[LoginController::class,'handleLogin'])->name('login.submit');
+Route::get('/posts/trash', [PostController::class, 'trashed'])->name('posts.trashed');
+Route::get('/posts/{id}/restore',[PostController::class, 'restore'])->name('posts.restore');
+Route::delete('/posts/{id}/force-delete', [PostController::class, 'forceDelete'])->name('posts.force-delete');
 Route::resource('posts',PostController::class);
+
