@@ -36,7 +36,7 @@
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->description }}</td>
-                                <td>{{ $post->category_id }}</td>
+                                <td>{{ $post->category->name }}</td>
                                 <td>{{ date('d-m-Y', $post->created) }}</td>
                                 <td>
                                     <div class="d-flex">
