@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Services\PaymentService;
 use App\Services\SimpleService;
 use Illuminate\Http\Request;
-
 class SampleController extends Controller
 {
-    public function index(Request $request,SimpleService $simpleService){
-        $simpleService->log('this is a test log');
-        return $request->all();
+    public function index(PaymentService $paymentService){
+        
+        dd(app());
     }
 }
